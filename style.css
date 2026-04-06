@@ -2,16 +2,16 @@
    VARIABLES Y COLORES
    ========================= */
 :root {
-  /* Colores base */
+  /* Colores base de la página */
   --color-bg-main: #FFFDE5;
   --color-text-main: #3A2E2A;
 
-  /* Pasteles secundarios */
+  /* Tonos secundarios usados en secciones y detalles */
   --color-pink: #F2C6D4;
   --color-blue: #CFE8EE;
   --color-lilac: #E2D6F3;
 
-  /* Acento */
+  /* Color de acento para destacar elementos */
   --color-accent: #C8A97E;
 }
 
@@ -75,6 +75,7 @@ p {
   left: 0;
   width: 0%;
   height: 3px;
+  /* Se expande horizontalmente según el scroll */
   background: linear-gradient(90deg, var(--color-accent), var(--color-pink));
   z-index: 9998;
   transition: width 0.1s ease;
@@ -83,17 +84,19 @@ p {
 /* =========================
    COLOR POR SECCIÓN
    ========================= */
-#intro    { background: #FFFDE5; }
-#birthday { background: #F9EEF3; }
-#animals  { background: #EEF5F9; }
-#likes    { background: #F3F0FA; }
-#message  { background: #FFF8EE; }
-#final    { background: #FFFDE5; }
+#intro    { z-index: 1;background: #FFFDE5; }
+#birthday { z-index: 2;background: #F9EEF3; }
+#animals  { z-index: 3;background: #EEF5F9; }
+#likes    { z-index: 4;background: #F3F0FA; }
+#message  { z-index: 5;background: #FFF8EE; }
+#final    { z-index: 6;background: #FFFDE5; }
 
 /* =========================
    SECCIONES
    ========================= */
 section {
+  position: sticky;
+  top: 0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -105,6 +108,7 @@ section {
   width: 100%;
   max-width: 900px;
   padding: 2.5rem;
+  /* Tarjeta principal que aparece con animación al entrar en pantalla */
   border: 2px solid rgba(58, 46, 42, 0.18); /* borde suave */
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.55);    /* fondo claro encima del bg */
@@ -121,6 +125,8 @@ section {
 .section-visual {
   flex: 1;
 }
+
+
 
 /* =========================
    LAYOUT Y GRID
@@ -141,6 +147,7 @@ section {
 }
 
 .grid li {
+  /* Cada item funciona como una pequeña tarjeta visual */
   background: rgba(242, 198, 212, 0.2);
   border-radius: 12px;
   padding: 1rem;
@@ -166,6 +173,7 @@ ul {
    ANIMACIONES Y EFECTOS
    ========================= */
 .is-floating {
+  /* Movimiento suave continuo para elementos decorativos */
   animation: float 3s ease-in-out infinite;
 }
 
@@ -182,6 +190,7 @@ ul {
 }
 
 @keyframes bubble {
+  /* Entrada con rebote suave de los bloques principales */
   0% {
     opacity: 0;
     transform: translateY(50px) scale(0.9);
@@ -197,6 +206,7 @@ ul {
 }
 
 .page-loader {
+  /* Capa inicial que cubre la página mientras aparece la intro */
   position: fixed;
   inset: 0;
   background: #000;
@@ -211,6 +221,7 @@ ul {
 
 /* Texto */
 .loader-text {
+  /* Texto principal del loader con entrada y salida gradual */
   color: white;
   font-size: 2.2rem;
   font-family: 'Playfair Display', serif;
@@ -250,4 +261,3 @@ ul {
 /*section, div {
   border: 1px solid red;
 }*/
-

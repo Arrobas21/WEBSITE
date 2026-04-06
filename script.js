@@ -1,45 +1,59 @@
+// Espera a que toda la página termine de cargar antes de ejecutar el script
 window.addEventListener("load", () => {
 
-  // Barra de progreso de scroll
-  const progressBar = document.getElementById("progress-bar");
+  // Busca la barra superior que mostrará el progreso del scroll
+  const progressBar = document.getElementById("progress-bar"); 
+  
+  // Escucha el evento de scroll en toda la ventana
   window.addEventListener("scroll", () => {
+    // Guarda la distancia recorrida desde la parte superior de la página
     const scrollTop = window.scrollY;
+
+    // Calcula la altura total que se puede recorrer haciendo scroll
     const docHeight = document.body.scrollHeight - window.innerHeight;
+
+    // Convierte el avance actual en un porcentaje
     const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    // Actualiza el ancho de la barra con ese porcentaje
     progressBar.style.width = pct + "%";
   });
 
+  // Selecciona el loader o pantalla de carga inicial
   const loader = document.querySelector(".page-loader");
 
-  // tiempo total en pantalla (oscuro + texto visible)
+  // Espera el tiempo definido antes de comenzar a ocultar el loader
   setTimeout(() => {
 
-    // empieza a desvanecerse
+    // Agrega la clase que inicia el desvanecimiento
     loader.classList.add("hide");
 
-    // eliminar después del fade
+    // Espera a que termine la transición y luego elimina el loader del DOM
     setTimeout(() => {
       loader.remove();
     }, 1500);
 
-  }, 3200); // ← duración en negro (ajústalo aquí)
+  }, 3200); // Tiempo que permanece visible el loader antes de desaparecer
 
-  // Seleccionar todos los cuadros
+  // Selecciona todos los cuadros que se animarán al entrar en pantalla
   const cajas = document.querySelectorAll(".section-content");
 
-  // Observer para detectar cuando bajas a cada sección
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        observer.unobserve(entry.target); // para que solo se anime una vez
-      }
-    });
-  }, {
-    threshold: 0.3
+  // Crea un observador para detectar cuándo un cuadro entra en la vista
+  const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.remove("show");
+      void entry.target.offsetWidth;
+      entry.target.classList.add("show");
+    } else {
+      entry.target.classList.remove("show");
+    }
   });
+}, {
+  threshold: 0.3
+});
 
-  // Observar cada cuadro
+  // Empieza a observar cada cuadro seleccionado
   cajas.forEach((caja) => {
     observer.observe(caja);
   });
