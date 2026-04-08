@@ -84,12 +84,12 @@ p {
 /* =========================
    COLOR POR SECCIÓN
    ========================= */
-#intro    { z-index: 1;background: #FFFDE5; }
-#birthday { z-index: 2;background: #F9EEF3; }
-#animals  { z-index: 3;background: #EEF5F9; }
-#likes    { z-index: 4;background: #F3F0FA; }
-#message  { z-index: 5;background: #FFF8EE; }
-#final    { z-index: 6;background: #FFFDE5; }
+#intro    { opacity: 1 ; z-index: 1; }
+#birthday { z-index: 2; }
+#animals  { z-index: 3; }
+#likes    { z-index: 4; }
+#message  { z-index: 5; }
+#final    { z-index: 6; }
 
 /* =========================
    SECCIONES
@@ -102,6 +102,11 @@ section {
   justify-content: center;
   align-items: center;
   padding: 3rem 1.5rem;
+  opacity: 1;
+}
+
+section.visible {
+  opacity: 1;
 }
 
 .section-content {
@@ -215,7 +220,6 @@ ul {
   align-items: center;
   z-index: 9999;
   opacity: 1;
-  transition: opacity 1.5s ease;
 }
 
 
