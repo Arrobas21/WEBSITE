@@ -27,12 +27,7 @@
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.7;
-  background: linear-gradient(
-     180deg,
-    var(--color-bg-main) 0%,
-    #FFFDE5 50%,
-    var(--color-bg-main) 100%
-    );
+  background: #FFFDE5;
   color: var(--color-text-main);
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='%23C8A97E' opacity='0.7'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23C8A97E'/%3E%3C/svg%3E") 12 12, auto;
 }
@@ -84,7 +79,7 @@ p {
 /* =========================
    COLOR POR SECCIÓN
    ========================= */
-#intro    { opacity: 1 ; z-index: 1; }
+#intro    { z-index: 1; }
 #birthday { z-index: 2; }
 #animals  { z-index: 3; }
 #likes    { z-index: 4; }
@@ -102,12 +97,8 @@ section {
   justify-content: center;
   align-items: center;
   padding: 3rem 1.5rem;
-  opacity: 1;
 }
 
-section.visible {
-  opacity: 1;
-}
 
 .section-content {
   width: 100%;
@@ -118,20 +109,13 @@ section.visible {
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.55);    /* fondo claro encima del bg */
   box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-  opacity: 0;
-  transform: translateY(50px) scale(0.9);
-}
 
-.section-content.show {
-  animation: bubble 0.8s ease forwards;
 }
 
 .section-text,
 .section-visual {
   flex: 1;
 }
-
-
 
 /* =========================
    LAYOUT Y GRID
@@ -194,21 +178,6 @@ ul {
   }
 }
 
-@keyframes bubble {
-  /* Entrada con rebote suave de los bloques principales */
-  0% {
-    opacity: 0;
-    transform: translateY(50px) scale(0.9);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-5px) scale(1.05);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
 
 .page-loader {
   /* Capa inicial que cubre la página mientras aparece la intro */
@@ -219,7 +188,6 @@ ul {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  opacity: 1;
 }
 
 
@@ -258,6 +226,336 @@ ul {
   opacity: 0;
 }
 
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* =========================
+   #FINAL — Sección de cierre
+   Agrega esto al final de style.css
+   ========================= */
+
+#final {
+  overflow: hidden;
+}
+ 
+/* FIX: NO ponemos opacity:0 en CSS para los elementos de texto.
+   GSAP los maneja con fromTo() — si el CSS los oculta antes
+   de que GSAP arranque, el usuario ve un flash de nada. */
+.final-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+  /* Sobrescribe el glass card del .section-content base */
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+ 
+/* Capa de confetti: detrás de todo */
+.final-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+ 
+.confetti-piece {
+  position: absolute;
+  will-change: transform, opacity;
+}
+ 
+/* Línea decorativa superior */
+.final-topline {
+  width: 0;                   /* GSAP la expande a 60px */
+  height: 1px;
+  background: var(--color-accent);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+ 
+/* Eyebrow — empieza visible para CSS, GSAP la anima desde y:16 */
+.final-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 1.2rem;
+  position: relative;
+  z-index: 1;
+  /* FIX: opacity se deja en 1 en CSS.
+     GSAP usa fromTo({ opacity:0 } → { opacity:1 })
+     así no hay conflicto entre CSS y GSAP */
+}
+ 
+/* Título principal */
+.final-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1.1;
+  margin: 0 0 1.6rem;
+  position: relative;
+  z-index: 1;
+}
+ 
+.final-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+ 
+/* Divisor con corazón */
+.final-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.4rem;
+  position: relative;
+  z-index: 1;
+}
+ 
+.final-divider-line {
+  width: 50px;
+  height: 1px;
+  background: var(--color-pink);
+}
+ 
+.final-heart {
+  width: 22px;
+  height: 20px;
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+ 
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1);    }
+  15%       { transform: scale(1.25); }
+  30%       { transform: scale(1);    }
+  45%       { transform: scale(1.15); }
+  60%       { transform: scale(1);    }
+}
+ 
+/* Subtítulo */
+.final-sub {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: #8a7a6a;
+  margin: 0 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+ 
+/* Firma */
+.final-signature {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-accent);
+  margin: 0 0 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+ 
+/* Pie editorial */
+.final-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+ 
+.final-footer-line {
+  width: 30px;
+  height: 0.5px;
+  background: var(--color-accent);
+}
+ 
+.final-footer-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* =========================
+   #BIRTHDAY — Split layout con número
+   Agrega al final de style.css
+   ========================= */
+ 
+/* Sobreescribe el .section-content base para el split */
+.bday-content {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  min-height: 380px;
+  max-width: 860px;
+}
+ 
+/* ── Panel izquierdo (color rosa) ── */
+.bday-left {
+  flex: 0 0 42%;
+  background: var(--color-pink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+ 
+/* Círculo decorativo de fondo */
+.bday-left::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(153, 53, 86, 0.15);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+ 
+.bday-left::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1px solid rgba(153, 53, 86, 0.08);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+ 
+/* Número grande */
+.bday-num-wrap {
+  position: relative;
+  z-index: 1;
+}
+ 
+.bday-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4rem, 10vw, 6.5rem);
+  font-weight: 600;
+  color: #993556;
+  line-height: 1;
+  display: block;
+  /* GSAP anima desde opacity:0, no lo ponemos en CSS */
+}
+ 
+.bday-years {
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #72243e;
+  text-align: center;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+ 
+/* Línea vertical decorativa entre paneles */
+.bday-left-line {
+  position: absolute;
+  right: 0;
+  top: 10%;
+  width: 1px;
+  height: 0;           /* GSAP la expande */
+  background: rgba(153, 53, 86, 0.2);
+}
+ 
+/* ── Panel derecho (texto) ── */
+.bday-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 2rem 2.5rem 2.5rem;
+  gap: 0;
+}
+ 
+.bday-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 1rem;
+}
+ 
+.bday-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1.15;
+  margin: 0 0 1.1rem;
+}
+ 
+.bday-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+ 
+.bday-body {
+  font-size: 0.9rem;
+  color: #6a5060;
+  line-height: 1.75;
+  margin: 0 0 1.5rem;
+}
+ 
+/* Tag con línea */
+.bday-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.bday-tag-line {
+  width: 0;            /* GSAP la expande */
+  height: 1px;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+ 
+.bday-tag-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+ 
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .bday-content {
+    flex-direction: column !important;
+  }
+ 
+  .bday-left {
+    flex: 0 0 auto;
+    padding: 2rem 1rem;
+  }
+ 
+  .bday-left-line {
+    display: none;
+  }
+}
 
 /* =========================
    DEBUG (TEMPORALES)

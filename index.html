@@ -37,18 +37,36 @@
 
     <!-- ===== Sección: Birthday ===== -->
     <section id="birthday">
-     <div class="section-content layout-two-columns">
-
-      <div class= "section-text">
-        <h2>Feliz cumpleaños</h2>
-        <p> Hoy celebramos tu existencia </p>
+     <div class="section-content bday-content">
+ 
+    <!-- PANEL IZQUIERDO: número grande -->
+    <div class="bday-left" id="bdayLeft">
+      <div class="bday-num-wrap">
+        <span class="bday-num" id="bdayNum">0</span>
       </div>
-
-      <div class = "section-visual">
-        🎂
+      <p class="bday-years">años</p>
+      <div class="bday-left-line" id="bdayLeftLine"></div>
+    </div>
+ 
+    <!-- PANEL DERECHO: texto -->
+    <div class="bday-right" id="bdayRight">
+      <p class="bday-eyebrow" id="bdayEyebrow">un día muy especial</p>
+ 
+      <h2 class="bday-title" id="bdayTitle">
+        Feliz<br><em>cumpleaños</em>
+      </h2>
+ 
+      <p class="bday-body" id="bdayBody">
+        Hoy celebramos tu existencia y todo lo que traes al mundo.
+      </p>
+ 
+      <div class="bday-tag" id="bdayTag">
+        <span class="bday-tag-line"></span>
+        <span class="bday-tag-text">con todo el cariño</span>
       </div>
-     </div>
-
+    </div>
+ 
+  </div>
     </section>
     <!-- ===== /Sección: Birthday ===== -->
 
@@ -108,12 +126,46 @@
 
     <!-- ===== Sección: Final ===== -->
     <section id = "final">
-      <div class="section-content">
-        <div class="section-text">
-          <h2>Feliz cumpleaños</h2>
-          <p>Esto es solo para ti</p>
-        </div>
-      </div>
+      <div class="section-content final-content">
+ 
+    <!-- Confetti canvas (GSAP lo llena con JS) -->
+    <div class="final-confetti" id="finalConfetti"></div>
+ 
+    <!-- Línea superior decorativa -->
+    <div class="final-topline" id="finalTopline"></div>
+ 
+    <!-- Eyebrow -->
+    <p class="final-eyebrow" id="finalEyebrow">para ti, siempre</p>
+ 
+    <!-- Título principal -->
+    <h2 class="final-title" id="finalTitle">
+      Feliz<br><em>cumpleaños</em>
+    </h2>
+ 
+    <!-- Divisor con corazón -->
+    <div class="final-divider" id="finalDivider">
+      <span class="final-divider-line"></span>
+      <svg class="final-heart" viewBox="0 0 24 22" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 20S2 13.5 2 7A5 5 0 0112 3.5 5 5 0 0122 7C22 13.5 12 20 12 20Z"
+          fill="#F2C6D4" stroke="#993556" stroke-width="1"/>
+      </svg>
+      <span class="final-divider-line"></span>
+    </div>
+ 
+    <!-- Subtítulo -->
+    <p class="final-sub" id="finalSub">hecho con cariño · solo para ti</p>
+ 
+    <!-- Firma -->
+    <p class="final-signature" id="finalSig">— con todo el cariño del mundo</p>
+ 
+    <!-- Pie editorial -->
+    <div class="final-footer" id="finalFooter">
+      <span class="final-footer-line"></span>
+      <span class="final-footer-text">fin</span>
+      <span class="final-footer-line"></span>
+    </div>
+ 
+  </div>
     </section>
     <!-- ===== /Sección: Final ===== -->
 
