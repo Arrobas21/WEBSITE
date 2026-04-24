@@ -1,0 +1,156 @@
+.bday-content {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  min-height: 380px;
+  max-width: 860px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.bday-left {
+  flex: 0 0 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background: var(--color-pink);
+  overflow: hidden;
+}
+
+.bday-left,
+.bday-right {
+  position: relative;
+}
+
+.bday-left::before,
+.bday-left::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.bday-left::before {
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(153, 53, 86, 0.15);
+}
+
+.bday-left::after {
+  width: 300px;
+  height: 300px;
+  border: 1px solid rgba(153, 53, 86, 0.08);
+}
+
+.bday-num-wrap,
+.bday-years {
+  position: relative;
+  z-index: 1;
+}
+
+.bday-num {
+  display: block;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(4rem, 10vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #993556;
+}
+
+.bday-years {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-align: center;
+  text-transform: uppercase;
+  color: #72243e;
+}
+
+.bday-left-line {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  width: 1px;
+  height: 0;
+  background: rgba(153, 53, 86, 0.2);
+}
+
+.bday-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  padding: 2.5rem 2rem 2.5rem 2.5rem;
+}
+
+.bday-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.bday-title {
+  margin: 0 0 1.1rem;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-text-main);
+}
+
+.bday-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.bday-body {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #6a5060;
+}
+
+.bday-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bday-tag-line {
+  width: 0;
+  height: 1px;
+  flex-shrink: 0;
+  background: var(--color-accent);
+}
+
+.bday-tag-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-accent);
+}
+
+@media (max-width: 600px) {
+  .bday-content {
+    flex-direction: column !important;
+  }
+
+  .bday-left {
+    flex: 0 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .bday-left-line {
+    display: none;
+  }
+}

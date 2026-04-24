@@ -1,0 +1,170 @@
+#animals {
+  overflow: hidden;
+}
+
+.animals-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;          /* ← este es el que realmente contiene todo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ORBS */
+.animals-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.animals-orb--1 {
+  width: 320px;
+  height: 320px;
+  background: #CFE8EE;   /* azul pastel */
+  top: -80px;
+  left: -80px;
+  opacity: 0;
+}
+
+.animals-orb--2 {
+  width: 260px;
+  height: 260px;
+  background: #E2D6F3;   /* lila */
+  bottom: -60px;
+  right: -60px;
+  opacity: 0;
+}
+
+.animals-orb--3 {
+  width: 180px;
+  height: 180px;
+  background: #F2C6D4;   /* rosa */
+  top: 40%;
+  left: 55%;
+  opacity: 0;
+}
+
+.animals-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;            /* GSAP lo aparece suavemente */
+}
+
+.animals-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.animals-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: animalsParticleFloat linear infinite;
+  pointer-events: none;
+}
+
+@keyframes animalsParticleFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(0); }
+  15%  { opacity: 1; }
+  85%  { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(-90vh) scale(0.3); }
+}
+
+/* CARD */
+.animals-content {
+  position: relative;
+  z-index: 3;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 2rem !important;
+  padding: 2.5rem 2.8rem !important;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.82) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 32px rgba(180, 210, 220, 0.18) !important;
+
+  max-width: 600px;
+  /* GSAP anima la entrada — no ponemos opacity:0 aquí */
+}
+
+.animals-visual {
+  font-size: 4rem;
+  flex-shrink: 0;
+  line-height: 1;
+  filter: drop-shadow(0 4px 12px rgba(180,210,220,0.4));
+}
+
+/* Texto */
+.animals-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #185FA5;
+  margin: 0 0 0.7rem;
+}
+
+.animals-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1.15;
+  margin: 0 0 0.9rem;
+}
+
+.animals-body {
+  font-size: 0.85rem;
+  color: #5a7080;
+  line-height: 1.75;
+  margin: 0 0 1.2rem;
+}
+
+/* Tag con línea */
+.animals-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;           /* GSAP lo aparece */
+}
+
+.animals-tag-line {
+  width: 0;             /* GSAP expande a 24px */
+  height: 1px;
+  background: #185FA5;
+  flex-shrink: 0;
+}
+
+.animals-tag-text {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #185FA5;
+  white-space: nowrap;
+}
+
+/* ── Responsive ────────────────────────── */
+@media (max-width: 560px) {
+  .animals-content {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 2rem 1.5rem !important;
+  }
+  .animals-tag {
+    justify-content: center;
+  }
+}

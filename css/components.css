@@ -1,0 +1,52 @@
+/* PROGRESS BAR */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-pink));
+  z-index: 9998;
+  transition: width 0.1s ease;
+}
+
+/* LOADER */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 9999;
+}
+
+.loader-text {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  color: white;
+  opacity: 0;
+  animation: textFadeInOut 3s ease forwards;
+}
+
+.page-loader.hide {
+  opacity: 0;
+}
+
+/* ANIMACIONES GENERALES */
+.is-floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes textFadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  20% { opacity: 1; transform: translateY(0); }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}

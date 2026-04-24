@@ -1,0 +1,64 @@
+/* CAPAS */
+#intro { z-index: 1; }
+#birthday { z-index: 2; }
+#animals { z-index: 3; }
+#likes { z-index: 4; }
+#message { z-index: 5; }
+#final { z-index: 6; }
+
+/* SECCIONES */
+section {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1.5rem;
+}
+
+.section-content {
+  width: 100%;
+  max-width: 900px;
+  padding: 2.5rem;
+  border: 2px solid rgba(58, 46, 42, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.section-text,
+.section-visual {
+  flex: 1;
+}
+
+/* LAYOUTS */
+.layout-two-columns {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.grid li {
+  background: rgba(242, 198, 212, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  cursor: default;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.grid li:hover {
+  transform: scale(1.12);
+  background: rgba(242, 198, 212, 0.5);
+}

@@ -1,0 +1,136 @@
+#final {
+  overflow: hidden;
+}
+
+.final-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  text-align: center;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.final-confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  will-change: transform, opacity;
+}
+
+.final-topline {
+  width: 0;
+  height: 1px;
+  margin-bottom: 2rem;
+  background: var(--color-accent);
+}
+
+.final-divider-line,
+.final-topline {
+  flex-shrink: 0;
+}
+
+.final-eyebrow,
+.final-title,
+.final-divider,
+.final-sub,
+.final-signature,
+.final-footer,
+.final-topline {
+  position: relative;
+  z-index: 1;
+}
+
+.final-eyebrow {
+  margin: 0 0 1.2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.final-title {
+  margin: 0 0 1.6rem;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-text-main);
+}
+
+.final-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.final-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1.4rem;
+}
+
+.final-divider-line {
+  width: 50px;
+  height: 1px;
+  background: var(--color-pink);
+}
+
+.final-heart {
+  width: 22px;
+  height: 20px;
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+
+.final-sub {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: #8a7a6a;
+}
+
+.final-signature {
+  margin: 0 0 2.5rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.final-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.final-footer-line {
+  width: 30px;
+  height: 0.5px;
+  background: var(--color-accent);
+}
+
+.final-footer-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}

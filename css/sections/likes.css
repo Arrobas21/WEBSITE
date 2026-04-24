@@ -1,0 +1,156 @@
+#likes {
+  /* Hereda position:sticky, min-height:100vh, flex de section */
+}
+
+#likes .likes-inner-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.likes-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;       /* GSAP lo aparece */
+}
+
+.likes-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.likes-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: likesParticleFloat linear infinite;
+  animation-play-state: paused;   /* JS las activa/pausa */
+  pointer-events: none;
+}
+
+.likes-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: likesParticleFloat linear infinite;
+  animation-play-state: paused;   /* JS las activa/pausa */
+  pointer-events: none;
+}
+
+/* ── Contenido ───────────────────────── */
+.likes-content {
+  position: relative;
+  z-index: 3;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 2.5rem !important;
+  text-align: center;
+ 
+  background: rgba(255,255,255,0.5) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.78) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 32px rgba(180,160,220,0.14) !important;
+  padding: 2.8rem 3rem !important;
+  max-width: 680px;
+}
+ 
+/* ── Header ──────────────────────────── */
+.likes-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #534AB7;
+  margin: 0 0 0.7rem;
+}
+ 
+.likes-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1.15;
+  margin: 0;
+}
+ 
+.likes-title em {
+  font-style: italic;
+  color: #7F77DD;
+}
+ 
+/* ── Stack de polaroids ──────────────── */
+.likes-stack {
+  position: relative;
+  width: 340px;
+  height: 180px;
+  /* Los polaroids se posicionan absolute dentro */
+}
+ 
+.likes-pol {
+  position: absolute;
+  width: 120px;
+  background: #fff;
+  padding: 10px 10px 30px;
+  border-radius: 2px;
+  box-shadow: 0 4px 16px rgba(100,80,160,0.13);
+  cursor: default;
+  /* GSAP controla transform — posición inicial: apilados al centro */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);   /* GSAP sobreescribe esto */
+}
+ 
+.likes-pol-img {
+  width: 100px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: #F3F0FA;
+  border-radius: 1px;
+}
+ 
+.likes-pol-cap {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.68rem;
+  color: #888;
+  text-align: center;
+  margin-top: 5px;
+  letter-spacing: 0.04em;
+}
+ 
+/* ── Responsive ──────────────────────── */
+@media (max-width: 560px) {
+  .likes-stack {
+    width: 280px;
+    height: 150px;
+  }
+ 
+  .likes-pol {
+    width: 100px;
+    padding: 8px 8px 24px;
+  }
+ 
+  .likes-pol-img {
+    width: 84px;
+    height: 65px;
+    font-size: 1.8rem;
+  }
+ 
+  .likes-content {
+    padding: 2rem 1.5rem !important;
+  }
+}
