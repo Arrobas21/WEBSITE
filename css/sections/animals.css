@@ -1,5 +1,6 @@
 #animals {
   overflow: hidden;
+  z-index: 3;
 }
 
 .animals-inner {

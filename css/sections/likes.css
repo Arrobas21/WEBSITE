@@ -1,8 +1,9 @@
 #likes {
+  z-index: 4;
   /* Hereda position:sticky, min-height:100vh, flex de section */
 }
 
-#likes .likes-inner-wrap {
+.likes-inner-wrap {
   position: relative;
   width: 100%;
   min-height: 100vh;

@@ -28,5 +28,5 @@ window.addEventListener("load", () => {
   initFinalAnimation();
   initBirthdayAnimation();
   initAnimalsAnimation();
-  animarLikes();
+  initLikesAnimation();
 });

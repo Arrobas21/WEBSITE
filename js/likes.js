@@ -4,7 +4,7 @@
    en script.js, después de los ScrollTriggers de colores.
    ========================= */
 
-(function animarLikes() {
+function initLikesAnimation() {
 
   // ── 1. Posiciones finales del abanico ──────────
   // Cada polaroid tiene: x, y, rotación final en el abanico
@@ -137,30 +137,38 @@
     end: 'bottom top',
 
     onEnter: () => {
+      console.log("ENTER likes");
       document.querySelectorAll('.likes-particle').forEach(p => {
         p.style.animationPlayState = 'running';
       });
+      gsap.to('.likes-pattern', { opacity: 1, duration: 0.4 });
     },
 
     onLeave: () => {
+      console.log("LEAVE likes");
       document.querySelectorAll('.likes-particle').forEach(p => {
         p.style.animationPlayState = 'paused';
         p.style.opacity = '0';
       });
+      gsap.to('.likes-pattern', { opacity: 0, duration: 0.4 });
     },
 
     onEnterBack: () => {
+      console.log("ENTER BACK likes");
       document.querySelectorAll('.likes-particle').forEach(p => {
         p.style.animationPlayState = 'running';
       });
+      gsap.to('.likes-pattern', { opacity: 1, duration: 0.4 });
     },
 
     onLeaveBack: () => {
+      console.log("LEAVE BACK likes");
       document.querySelectorAll('.likes-particle').forEach(p => {
         p.style.animationPlayState = 'paused';
         p.style.opacity = '0';
       });
+      gsap.to('.likes-pattern', { opacity: 0, duration: 0.4 });
     },
   });
 
-})();
+}

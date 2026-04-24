@@ -4,13 +4,15 @@ function initAnimalsAnimation() {
     { color: "#E2D6F3", minSize: 3, maxSize: 8 },
     { color: "#F2C6D4", minSize: 2, maxSize: 5 },
     { color: "#C8A97E", minSize: 2, maxSize: 4 },
-  ];
+  ]; // paleta de colores suave y armoniosa, con tonos pastel que combinan bien con el tema de animales y naturaleza.
 
-  const particlesContainer = document.getElementById("animalsParticles");
+  const particlesContainer = document.getElementById("animalsParticles"); // contenedor específico para las partículas de la sección de animales
 
-  if (particlesContainer) {
-    for (let i = 0; i < 28; i++) {
-      const pal = PARTICLE_PALETTE[i % PARTICLE_PALETTE.length];
+  if (particlesContainer) // verificamos que el contenedor exista antes de intentar agregar partículas, para evitar errores si el elemento no se encuentra en el DOM.
+  {
+    for (let i = 0; i < 28; i++) // generamos 28 partículas para un efecto visual agradable sin sobrecargar la sección, manteniendo un equilibrio entre dinamismo y claridad.
+    {
+      const pal = PARTICLE_PALETTE[i % PARTICLE_PALETTE.length]; 
       const size = pal.minSize + Math.random() * (pal.maxSize - pal.minSize);
       const left = 5 + Math.random() * 90;
       const dur = 3 + Math.random() * 5;
@@ -29,7 +31,7 @@ function initAnimalsAnimation() {
         `opacity:0`,
       ].join(";");
 
-      particlesContainer.appendChild(p);
+      particlesContainer.appendChild(p); // agregamos cada partícula al contenedor específico de la sección de animales, asegurando que solo aparezcan en esa sección y no afecten otras partes del sitio.
     }
   }
 
@@ -39,7 +41,7 @@ function initAnimalsAnimation() {
       start: "top 60%",
       once: true,
     },
-  });
+  }); // timeline principal de animación para la sección de animales, que se activa cuando la sección entra en el viewport, creando una experiencia visual atractiva y coherente con el tema de la sección.
 
   tl.fromTo(
     ".animals-pattern",
@@ -117,11 +119,13 @@ function initAnimalsAnimation() {
     "<"
   );
 
-  ScrollTrigger.create({
-    trigger: "#animals",
-    start: "top 60%",
-    once: true,
-    onEnter: () => {
+
+  let orbsTween = [];
+  let orbsCreated = false;
+
+  function startOrbs() {
+  if (!orbsCreated) {
+    orbTweens = [
       gsap.to("#animalsOrb1", {
         x: 40,
         y: 35,
@@ -129,8 +133,7 @@ function initAnimalsAnimation() {
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
-      });
-
+      }),
       gsap.to("#animalsOrb2", {
         x: -35,
         y: -28,
@@ -138,8 +141,7 @@ function initAnimalsAnimation() {
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
-      });
-
+      }),
       gsap.to("#animalsOrb3", {
         x: -25,
         y: 20,
@@ -147,7 +149,52 @@ function initAnimalsAnimation() {
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
-      });
-    },
+      }),
+    ];
+
+    orbsCreated = true;
+  }
+
+  gsap.to(["#animalsOrb1", "#animalsOrb2", "#animalsOrb3"], {
+    opacity: 1,
+    duration: 0.3,
   });
+
+  orbTweens.forEach(tween => tween.resume());
+}
+
+function stopOrbs() {
+  gsap.to(["#animalsOrb1", "#animalsOrb2", "#animalsOrb3"], {
+    opacity: 0,
+    duration: 0.3,
+  });
+}
+
+ScrollTrigger.create({
+  trigger: "#animals",
+  start: "top bottom",
+  end: "bottom top",
+
+  onEnter: () => {
+    console.log("ENTER animals");
+    startOrbs();
+    gsap.to(".animals-pattern", { opacity: 1, duration: 0.3 });
+  },
+  onLeave: () => { 
+    console.log("LEAVE animals");
+    stopOrbs();
+    gsap.to(".animals-pattern", { opacity: 0, duration: 0.3 });
+   },
+  onEnterBack: () => {  
+    console.log("ENTER BACK animals");
+    startOrbs();
+    gsap.to(".animals-pattern", { opacity: 1, duration: 0.3 });
+  },
+  onLeaveBack: () => { 
+    console.log("LEAVE BACK animals");
+    stopOrbs();
+    gsap.to(".animals-pattern", { opacity: 0, duration: 0.3 });
+  },
+});
+
 }
