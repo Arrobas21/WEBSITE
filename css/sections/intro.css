@@ -1,275 +1,283 @@
 #intro {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
+      position: relative;
+      isolation: isolate;
+ 
+      --envelope-x: 300px;
+      --envelope-y: 200px;
+      --envelope-bg: #EDE8DF;
+      --envelope-shadow: #C9BFB0;
+      --letter-x: 250px;
+      --letter-y: calc(250px - 1rem - 10px);
+      --letter-bg: #F5F0E8;
+      --letter-shadow: #CEC5B5;
+      --letter-text: #2C1F14;
+      --letter-font: "Cormorant Garamond", serif;
+      --letter-button-text: #8B5E52;
+      --heart-bg: #8B5E52;
+      --heart-text: #FDF8F2;
+    }
+ 
+    @media (min-width: 650px) {
+      #intro {
+        --envelope-x: 520px;
+        --envelope-y: 340px;
+        --letter-x: 460px;
+        --letter-y: 400px;
+      }
+    }
+ 
+    /* CONTENEDOR */
+    #intro .cssletter {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+ 
+    /* ═══════════════════════════════════════════════════
+       SOBRE
+       FIX: overflow cambiado de hidden → visible para que
+       las cartas puedan emerger por encima del borde superior.
+       El clip visual se logra con el fondo y los pliegues.
+    ═══════════════════════════════════════════════════ */
+    #intro .envelope {
+      position: relative;
+      width: var(--envelope-x);
+      height: var(--envelope-y);
+      background: linear-gradient(145deg, #EDE8DF 0%, #E0D8CC 100%);
+      overflow: visible; /* FIX: era hidden — bloqueaba las cartas emergiendo */
+      box-shadow:
+        inset 0 0 40px -10px #C9BFB0,
+        0 8px 32px rgba(100,80,60,0.12),
+        0 2px 8px rgba(100,80,60,0.08);
+      border: 0.5px solid rgba(180,165,145,0.4);
+      z-index: 1;
+    }
+ 
+    /* PIEZAS */
+    #intro .envelope-folds {
+      position: absolute;
+      inset: 0;
+      /* FIX: overflow: hidden aquí para que los pliegues no
+         se salgan del sobre, sin afectar a las cartas que
+         están en un contenedor separado (.letters) */
+      overflow: hidden;
+      z-index: 2;
+      pointer-events: none;
+    }
+ 
+    /* Triángulo izquierdo */
+    #intro .envelope-left {
+      position: absolute;
+      left: 0; top: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: calc(var(--envelope-y) / 2) 0 calc(var(--envelope-y) / 2) calc(var(--envelope-x) * 0.44);
+      border-color: transparent transparent transparent rgba(180,160,130,0.22);
+    }
+ 
+    /* Triángulo derecho */
+    #intro .envelope-right {
+      position: absolute;
+      right: 0; top: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: calc(var(--envelope-y) / 2) calc(var(--envelope-x) * 0.44) calc(var(--envelope-y) / 2) 0;
+      border-color: transparent rgba(140,120,100,0.15) transparent transparent;
+    }
+ 
+    /* Triángulo inferior */
+    #intro .envelope-bottom {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 calc(var(--envelope-x) / 2) calc(var(--envelope-y) * 0.58) calc(var(--envelope-x) / 2);
+      border-color: transparent transparent rgba(160,140,118,0.28) transparent;
+    }
+ 
+    /* SOLAPA (flap) */
+    #intro .envelope-flap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 60%;
+      z-index: 4;
+      transform-origin: top center;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      background: linear-gradient(175deg, #E8E0D4 0%, #D8CFBF 100%);
+      clip-path: polygon(0 0, 100% 0, 50% 88%);
+      box-shadow: 0 2px 12px rgba(100,80,60,0.10);
+      pointer-events: none;
+    }
 
-  --envelope-x: 300px;
-  --envelope-y: 200px;
-  --envelope-bg: #EDE8DF;
-  --envelope-shadow: #C9BFB0;
-  --letter-x: 250px;
-  --letter-y: calc(250px - 1rem - 10px);
-  --letter-bg: #F5F0E8;
-  --letter-shadow: #CEC5B5;
-   --letter-text: #2C1F14;
-  --letter-font: "Cormorant Garamond", serif;
-  --letter-button-text: #8B5E52;
-  --heart-bg: #8B5E52;
-  --heart-text: #FDF8F2;
-}
+    #intro .envelope-flap,
+    #intro .envelope-folds,
+    #intro .envelope-left,
+    #intro .envelope-right,
+    #intro .envelope-bottom {
+      pointer-events: none;
+    }
+ 
+    /* pseudo-elementos originales — se mantienen sin cambios */
+    #intro .envelope-flap::before,
+    #intro .envelope-left::before,
+    #intro .envelope-right::before,
+    #intro .envelope-bottom::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--envelope-bg);
+      transform: rotate(45deg);
+      box-shadow: inset 0 0 30px -5px var(--envelope-shadow);
+    }
 
-@media (min-width: 650px) {
-  #intro {
-    --envelope-x: 520px;
-    --envelope-y: 340px;
-    --letter-x: 460px;
-    --letter-y: 400px;
-  }
-}
-
-/* CONTENEDOR */
-#intro .cssletter {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* SOBRE */
-#intro .envelope {
-  position: relative;
-  width: var(--envelope-x);
-  height: var(--envelope-y);
-  background: linear-gradient(145deg, #EDE8DF 0%, #E0D8CC 100%);
-  overflow: hidden;
-  box-shadow:
-    inset 0 0 40px -10px #C9BFB0,
-    0 8px 32px rgba(100,80,60,0.12),
-    0 2px 8px rgba(100,80,60,0.08);
-  border: 0.5px solid rgba(180,165,145,0.4);
-  z-index: 1;
-}
-
-/* PIEZAS */
-#intro .envelope-folds {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 2;
-  pointer-events: none;
-}
-/* Triángulo izquierdo */
-#intro .envelope-left {
-  position: absolute;
-  left: 0; top: 0;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: calc(var(--envelope-y) / 2) 0 calc(var(--envelope-y) / 2) calc(var(--envelope-x) * 0.44);
-  border-color: transparent transparent transparent rgba(180,160,130,0.22);
-}
-
-/* Triángulo derecho */
-#intro .envelope-right {
-  position: absolute;
-  right: 0; top: 0;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: calc(var(--envelope-y) / 2) calc(var(--envelope-x) * 0.44) calc(var(--envelope-y) / 2) 0;
-  border-color: transparent rgba(140,120,100,0.15) transparent transparent;
-}
-
-/* Triángulo inferior */
-#intro .envelope-bottom {
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 0 calc(var(--envelope-x) / 2) calc(var(--envelope-y) * 0.58) calc(var(--envelope-x) / 2);
-  border-color: transparent transparent rgba(160,140,118,0.28) transparent;
-}
-
-#intro .envelope-flap {
-  position: absolute;
-  top: 0; left: 0; right : 0;
-  height: 60%;
-  z-index: 4;
-  transform-origin: top center;
-  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  /* Triángulo superior con clip-path */
-  background: linear-gradient(175deg, #E8E0D4 0%, #D8CFBF 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 88%);
-  box-shadow: 0 2px 12px rgba(100,80,60,0.10);
-}
-
-/* FORMAS */
-#intro .envelope-flap::before,
-#intro .envelope-left::before,
-#intro .envelope-right::before,
-#intro .envelope-bottom::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  aspect-ratio: 1;
-  background: var(--envelope-bg);
-  transform: rotate(45deg);
-  box-shadow: inset 0 0 30px -5px var(--envelope-shadow);
-}
-
-#intro .envelope-left::before {
-  left: -65%;
-  top: 10%;
-}
-
-#intro .envelope-right::before {
-  right: -65%;
-  top: 10%;
-}
-
-#intro .envelope-bottom::before {
-  top: 60%;
-}
-
-#intro .envelope-flap::before {
-  bottom: 30px;
-  top: auto;
-  border-radius: 5rem;
-}
-
-/* CORAZÓN */
-#intro .heart {
-  position: absolute;
-  z-index: 5;
-  width: 48px;
-  height: 48px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 8px;
-  display: flex;  
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
-}
-
-#intro .heart:hover {
-  transform: translate(-50%, -50%) scale(1.15);
-}
-
-#intro .heart:before
-{
-  content: "";
-  display: block;
-  width: 32px;
-  height: 32px;
-  background: var(--heart-bg);
-  clip-path: path('M16 28 C16 28 2 19 2 10 A7 7 0 0 1 16 6.5 A7 7 0 0 1 30 10 C30 19 16 28 16 28Z');
-}
-
-#intro .heart-text {
-  position: absolute;
-  font-family: var(--letter-font);
-  font-size: 0.6rem;
-  color: var(--heart-text);
-  letter-spacing: 0.05em;
-  bottom: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  opacity: 0.7;
-}
-
-/* ESTADO ACTIVO */
-#intro .envelope.active .envelope-flap {
-  transform: rotateX(-175deg);
-}
-
-#intro .envelope.active .heart {
-  display: none;
-}
-
-/* CARTAS */
-#intro .letters {
-  position: absolute;
-
-  width: var(--envelope-x);
-  height: var(--envelope-y);
-
-  left: 50%;
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-
-  pointer-events: none;
-
-  z-index: 10;
-}
-
-#intro .letter {
-  position: absolute;
-  top: 0;
-  width: var(--letter-x);
-  height: var(--letter-y);
-  background: var(--letter-bg);
-  font-family: var(--letter-font);
-  font-size: 1.05rem;
-  line-height: 1.8;
-  padding: 2.5rem 1.8rem 2rem;
-  text-align: center;
-  box-shadow:
-    0 8px 32px rgba(80,60,40,0.14),
-    0 1px 4px rgba(80,60,40,0.08);
-  border: 0.5px solid rgba(180,160,130,0.3);
-  border-radius: 2px;
-  pointer-events: auto;
-  /* Ocultas inicialmente — GSAP las anima */
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-#intro .letter cite
-{
-  display: block;
-  margin-top: 1.2rem;
-  font-style: italic;
-  font-size: 0.85rem;
-  color: var(--letter-button-text);
-  opacity: 0.8;
-}
-
-/* BOTÓN */
-#intro .closeLetter {
-  position: absolute;
-  top: 0.8rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-}
-
-#intro .closeLetter::before {
-  content: "˚ʚ❤︎ɞ˚";
-  color: var(--letter-button-text);
-  font-family: var(--letter-font);
-  font-size: 0.9rem;
-}
-
-@media (min-width: 650px) {
-  #intro .envelope-flap::before {
-    bottom: 100px;
-  
-  }
-  #intro .heart {
-    width: 150px;
-  }
-
-}
+    #intro .envelope-left::before   { left: -65%; top: 10%; }
+    #intro .envelope-right::before  { right: -65%; top: 10%; }
+    #intro .envelope-bottom::before { top: 60%; }
+    #intro .envelope-flap::before   { bottom: 30px; top: auto; border-radius: 5rem; }
+ 
+    /* ═══════════════════════════════════════════════════
+       CORAZÓN / BOTÓN
+       FIX: el ::before usaba clip-path path() que recortaba
+       visualmente el área clickeable. Se simplifica con
+       un path SVG inline para máxima compatibilidad.
+       El botón conserva su posición, tamaño y lógica.
+    ═══════════════════════════════════════════════════ */
+    #intro .heart {
+      position: absolute;
+      z-index: 1000;
+      /* AJUSTE: de 36px → 64px en mobile.
+         El sobre mide 300×200px; 64px = ~21% del ancho,
+         proporcional sin dominar. Área de click cómoda. */
+      width: 64px;
+      height: 64px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 8px; /* padding extra amplía área clickeable sin agrandar visualmente el ícono */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      transition: transform 0.2s ease;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+ 
+    #intro .heart:hover {
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+ 
+    #intro .heart svg {
+      /* AJUSTE: de 28×26px → 48×44px, proporcional al botón */
+      width: 48px;
+      height: 44px;
+      display: block;
+      flex-shrink: 0;
+      fill: var(--heart-bg);
+    }
+ 
+    #intro .heart-text {
+      font-family: var(--letter-font);
+      font-size: 0.6rem;
+      color: var(--letter-button-text);
+      letter-spacing: 0.10em;
+      white-space: nowrap;
+      opacity: 0.72;
+      position: static;
+      transform: none;
+    }
+ 
+    /* ESTADO ACTIVO */
+    #intro .envelope.active .envelope-flap {
+      transform: rotateX(-175deg);
+    }
+ 
+    #intro .envelope.active .heart {
+      display: none;
+    }
+ 
+    /* ═══════════════════════════════════════════════════
+       CARTAS
+    ═══════════════════════════════════════════════════ */
+    #intro .letters {
+      position: absolute;
+      width: var(--envelope-x);
+      height: var(--envelope-y);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      /* FIX: z-index elevado para que las cartas queden
+         por encima del sobre y sus sombras */
+      z-index: 20;
+    }
+ 
+    #intro .letter {
+      position: absolute;
+      top: 0;
+      width: var(--letter-x);
+      height: var(--letter-y);
+      background: linear-gradient(160deg, #F9F5EF 0%, #F0EAE0 100%);
+      font-family: var(--letter-font);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--letter-text);
+      padding: 2.5rem 1.8rem 2rem;
+      text-align: center;
+      box-shadow:
+        inset 0 0 30px -8px #CEC5B5,
+        0 8px 32px rgba(80,60,40,0.14),
+        0 1px 4px rgba(80,60,40,0.08);
+      border: 0.5px solid rgba(180,160,130,0.3);
+      border-radius: 2px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+ 
+    #intro .letter cite {
+      display: block;
+      margin-top: 1.2rem;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--letter-button-text);
+      opacity: 0.8;
+    }
+ 
+    /* BOTÓN CERRAR */
+    #intro .closeLetter {
+      position: absolute;
+      top: 0.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+    }
+ 
+    #intro .closeLetter::before {
+      content: "˚ʚ❤︎ɞ˚";
+      color: var(--letter-button-text);
+      font-family: var(--letter-font);
+      font-size: 0.9rem;
+    }
+ 
+    @media (min-width: 650px) {
+      #intro .envelope-flap::before { bottom: 100px; }
+      /* AJUSTE desktop: sobre de 520×340px → corazón 80×80px (~15% del ancho).
+         Era 150px (enorme), quedó 40px (chico). 80px es el punto medio correcto. */
+      #intro .heart { width: 80px; height: 80px; padding: 10px; }
+      #intro .heart svg { width: 60px; height: 56px; }
+    }
 
