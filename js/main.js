@@ -19,7 +19,7 @@ window.addEventListener("load", () => {
 
   const progressBar = document.getElementById("progress-bar");
   const loader = document.querySelector(".page-loader");
-
+  
   initProgressBar(progressBar);
   initSectionColors(secs);
   initSectionContentAnimation();
@@ -29,4 +29,5 @@ window.addEventListener("load", () => {
   initBirthdayAnimation();
   initAnimalsAnimation();
   initLikesAnimation();
+  
 });

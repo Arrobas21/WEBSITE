@@ -1,4 +1,6 @@
 #animals {
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
   z-index: 3;
 }
